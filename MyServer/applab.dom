@@ -1,0 +1,18 @@
+<VirtualHost *:443>
+    ServerName localhost:443
+
+    SSLEngine on
+    SSLCertificateFile /etc/httpd/conf/server.crt
+    SSLCertificateKeyFile /etc/httpd/conf/server.key
+
+    WSGIDaemonProcess app home=/home/pold/Documents/Radboud/AppLab/Server/
+    WSGIScriptAlias / /home/pold/Documents/Radboud/AppLab/Server/app.wsgi
+
+    <Directory /home/pold/Documents/Radboud/AppLab/Server>
+        WSGIProcessGroup app
+        WSGIApplicationGroup %{GLOBAL}
+	Order allow,deny
+        Allow from all
+	Require all granted
+    </Directory>
+</VirtualHost>
